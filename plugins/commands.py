@@ -23,6 +23,7 @@ logger = logging.getLogger(__name__)
 
 import pymongo
 
+inclient = pymongo.MongoClient(DATABASE_URI)
 fclient = pymongo.MongoClient(DATABASE_URI)
 fdb = fclient[DATABASE_NAME]
 indb = inclient[DATABASE_NAME]
