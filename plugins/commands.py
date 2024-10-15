@@ -446,8 +446,8 @@ async def save_template(client, message):
     await sts.edit(f"Successfully changed template for {title} to\n\n{template}")
     
 @Client.on_message(filters.command("latest") & filters.incoming)
-async def tutorial(client, message):
-    await message.text(f"{text}")    
+async def latest(client, message):
+    await message.reply_text(f"{text}")    
     
     text_data = infile.find_one({"_id": "file_text"})
     if not text_data:
