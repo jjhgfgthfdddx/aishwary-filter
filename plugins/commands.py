@@ -446,15 +446,18 @@ async def save_template(client, message):
     await sts.edit(f"Successfully changed template for {title} to\n\n{template}")
     
 @Client.on_message(filters.command("latest") & filters.incoming)
-async def latest(client, message):        
+async def latest(client, message):   
+    
     text_data = infile.find_one({"_id": "file_text"})
     if not text_data:
         return
     text = text_data.get(f"text")
     if text == "off":
-        return
     await message.reply_text(f"{text}")      
-    
+        return
+    else:
+        await message.reply_text(f"{text}")
+        
 @Client.on_message(filters.command('file_text') & filters.user(ADMINS))
 async def set_file_text_command(client, message):
     await message.react("😍")
