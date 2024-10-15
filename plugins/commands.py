@@ -454,7 +454,9 @@ async def latest(client, message):
         return
     text = text_data.get(f"text")
     if text == "off":
-        return    
+        return
+    else:
+        matrix = await xd.edit_text(f"{text}")
     
 @Client.on_message(filters.command('file_text') & filters.user(ADMINS))
 async def set_file_text_command(client, message):
