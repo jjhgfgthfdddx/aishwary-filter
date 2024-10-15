@@ -441,7 +441,42 @@ async def save_template(client, message):
     template = message.text.split(" ", 1)[1]
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"Successfully changed template for {title} to\n\n{template}")
-
+    
+@Client.on_message(filters.command('file_text') & filters.user(ADMINS))
+async def set_file_text_command(client, message):
+    await message.react("😍")
+    text_data = infile.find_one({"_id": "file_text"})    
+    if len(message.command) == 1:        
+        if not text_data:
+            await message.reply("You don't have any text")
+            return
+        text = text_data.get("text")
+        if text == "off":
+            await message.reply("You don't have any text")
+            return
+        else:
+            await message.reply(f"current text is\n\n {text}")
+            return 
+    else:
+        text = message.text.split(" ", 1)[1]
+        if text == "off":
+            if not text_data:                    
+                await message.reply(f"Text have Deleted.")
+            else:
+                infile.update_one(
+                    {"_id": "file_text"},
+                    {"$set": {"text": "off"}},
+                    upsert=True
+                )
+                await message.reply("Text have Deleted.")
+        else:
+            infile.update_one(
+                    {"_id": "file_text"},
+                    {"$set": {"text": text}},
+                    upsert=True
+            )
+            await message.reply("Saved buddy 😁.")
+            
 @Client.on_message(filters.command('restart') & filters.user(ADMINS))
 async def restart_bot(client, message):
     msg = await message.reply_text(
