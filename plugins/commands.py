@@ -452,8 +452,7 @@ async def latest(client, message):
     if not text_data:
         return
     text = text_data.get(f"text")
-    if text == "off":
-    await message.reply_text(f"{text}")      
+    if text == "off":          
         return
     else:
         await message.reply_text(f"{text}")
