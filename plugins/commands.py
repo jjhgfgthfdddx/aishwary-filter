@@ -442,6 +442,18 @@ async def save_template(client, message):
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"Successfully changed template for {title} to\n\n{template}")
     
+@Client.on_message(filters.command("latest") & filters.incoming)
+async def tutorial(client, message):
+    await message.text(f"{text}")    
+    
+    text_data = infile.find_one({"_id": "file_text"})
+    if not text_data:
+        return
+    text = text_data.get("text")
+    if text == "off":
+        return
+    
+    
 @Client.on_message(filters.command('file_text') & filters.user(ADMINS))
 async def set_file_text_command(client, message):
     await message.react("😍")
