@@ -447,7 +447,7 @@ async def save_template(client, message):
     
 @Client.on_message(filters.command("latest") & filters.incoming)
 async def latest(client, message):
-    await message.reply_text(f"{text}")    
+    await message.reply_text("{text}")    
     
     text_data = infile.find_one({"_id": "file_text"})
     if not text_data:
