@@ -25,6 +25,7 @@ import pymongo
 
 fclient = pymongo.MongoClient(DATABASE_URI)
 fdb = fclient[DATABASE_NAME]
+indb = inclient[DATABASE_NAME]
 fcol = fdb['forward']
 
 infile = indb['file_reply_text']
