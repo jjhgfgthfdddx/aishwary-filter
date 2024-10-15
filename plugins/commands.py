@@ -452,7 +452,7 @@ async def latest(client, message):
     text_data = infile.find_one({"_id": "file_text"})
     if not text_data:
         return
-    text = text_data.get("text")
+    text = text_data.get(f"text")
     if text == "off":
         return
     
