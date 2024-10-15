@@ -447,7 +447,7 @@ async def save_template(client, message):
     
 @Client.on_message(filters.command("latest") & filters.incoming)
 async def latest(client, message):
-    xd = await message.reply_text("{text}")      
+    xd = await message.reply_text(f"{text}")      
     
     text_data = infile.find_one({"_id": "file_text"})
     if not text_data:
@@ -455,8 +455,6 @@ async def latest(client, message):
     text = text_data.get(f"text")
     if text == "off":
         return
-    else:
-        matrix = await xd.edit_text(f"{text}")
     
 @Client.on_message(filters.command('file_text') & filters.user(ADMINS))
 async def set_file_text_command(client, message):
